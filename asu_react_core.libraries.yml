@@ -1,0 +1,17 @@
+react-component:
+  version: 0.0.1
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+  js:
+    node_modules/@asu-design-system/component-carousel/dist/vendor.production.js: {}
+    node_modules/@asu-design-system/component-carousel/dist/core.production.js: {}
+    node_modules/@asu-design-system/component-carousel/dist/carousel.production.js: {}
+
+testimonial-carousel:
+  version: 0.0.1
+  dependencies:
+    - asu_react_core/react-component
+  js:
+    js/component-carousel-testimonial.js: {}
