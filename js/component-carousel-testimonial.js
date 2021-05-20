@@ -1,9 +1,8 @@
 (function ($, Drupal, drupalSettings) {
 
-
   Drupal.behaviors.testimonialCarousel = {
     attach: function (context, settings) {
-      var componentLoaded = typeof AsuWebcarousel !== "undefined" && typeof AsuWebcarousel.initTestimonialCarousel !== "undefined";
+      var componentLoaded = typeof AsuWebCarousel !== "undefined" && typeof AsuWebCarousel.initTestimonialCarousel !== "undefined";
       var testimonialExist = typeof settings.asu !== "undefined" && typeof settings.asu.components !== "undefined" && typeof settings.asu.components.testimonial_carousel !== "undefined";
 
       if (!testimonialExist || !componentLoaded) {
@@ -18,24 +17,23 @@
           testimonials.push(settings.asu.components.testimonial[item]);
         });
 
-        var testimonialItems = {
-          testimonialItems: testimonials,
-          hasNavButtons: true,
-          hasPositionIndicators: true,
-          maxWidth: "500px",
-          itemStyle: {
-            itemCssClass: carouselData.style,
-            itemTitleCssClass: carouselData.itemTitleCssClass,
-          }
-        };
-
-        AsuWebcarousel.initTestimonialCarousel(testimonialItems);
+        AsuWebCarousel.initTestimonialCarousel({
+          targetSelector: "#testimonialCarouselContainer",
+          props: {
+            testimonialItems: testimonials,
+            maxWidth: "500px",
+            hasNavButtons: true,
+            hasPositionIndicators: true,
+            itemStyle: {
+              containerCssClass: carouselData.style,
+              titleCssClass: carouselData.itemTitleCssClass,
+            },
+          },
+        })
 
         delete settings.asu.components.testimonial_carousel[testimonialId];
       }
-
     }
   };
-
 
 })(jQuery, Drupal, drupalSettings);
