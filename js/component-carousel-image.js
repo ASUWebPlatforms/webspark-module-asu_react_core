@@ -22,7 +22,7 @@
           props: {
             perView: "2",
             imageItems: images,
-            imageAutoSize: false,
+            imageAutoSize: true,
           },
         });
 
