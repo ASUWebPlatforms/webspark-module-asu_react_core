@@ -141,6 +141,26 @@ function asu_react_core_process_block_component_gallery(&$variables) {
   $variables['content']['#attached']['library'][] = 'asu_react_core/image_gallery_carousel';
 }
 
+function asu_react_core_process_block_component_card_arrangement(&$variables) {
+  $block = $variables['content']['#block_content'];
+
+  $rand_id = random_int(0, PHP_INT_MAX);
+  $card_arrangement = new \stdClass();
+  $card_arrangement->items = [];
+
+  if ($block->field_card_group && $block->field_card_group->target_id) {
+    foreach ($block->field_card_group->entity->field_cards as $paragraph_ref) {
+      $card_arrangement->items[] = $paragraph_ref->entity->uuid();
+    }
+  }
+
+  $settings = [];
+  $settings['components'][$block->bundle()][$rand_id] = $card_arrangement;
+  $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
+  $variables['content']['#attached']['library'][] = 'asu_react_core/card-arrangement';
+
+}
+
 function asu_react_core_process_component_gallery_image(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
@@ -231,6 +251,12 @@ function asu_react_core_process_component_card_story(&$variables) {
   $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
 }
 
+function asu_react_core_process_component_card_with_icon(&$variables) {
+  $paragraph = $variables['paragraph'];
+  $settings = _asu_react_core_get_card_content($paragraph);
+  $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
+}
+
 function _asu_core_get_images_items($block, $rand_id) {
   $image_carousel = new \stdClass();
   $image_carousel->items = [];
@@ -256,6 +282,22 @@ function _asu_react_core_get_card_content($paragraph) {
   $id = $paragraph->uuid();
   $card = new \stdClass();
   $card->id = $id;
+
+  switch ($paragraph->getType()) {
+    case 'card':
+    case 'card_with_icon':
+      $card->cardType = 'default';
+      break;
+    case 'card_degree':
+      $card->cardType = 'degree';
+      break;
+    case 'card_event':
+      $card->cardType = 'event';
+      break;
+    case 'card_story':
+      $card->cardType = 'story';
+      break;
+  }
 
   if ($paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
     $card->imageSource = file_create_url($paragraph->field_media->entity->field_media_image->entity->getFileUri());
@@ -297,6 +339,10 @@ function _asu_react_core_get_card_content($paragraph) {
     $tag->label = $term->entity->name->value;
     $tag->href = Url::fromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $term->entity->tid->value]);
     $card->tags[] = $tag;
+  }
+
+  if (isset($paragraph->field_icon)) {
+    $card->icon = $paragraph->field_icon->icon_name;
   }
 
   $settings = [];

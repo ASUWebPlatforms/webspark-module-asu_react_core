@@ -38,3 +38,9 @@ card_carousel:
     - asu_react_core/react-carousel
   js:
     js/component-carousel-card.js: { }
+card-arrangement:
+  version: 0.0.1
+  dependencies:
+    - asu_react_core/react-core
+  js:
+    js/component-card-arrangement.js: { }
