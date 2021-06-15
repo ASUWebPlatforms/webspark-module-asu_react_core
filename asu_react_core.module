@@ -39,9 +39,10 @@ function asu_react_core_preprocess_block(&$variables) {
 
 function asu_react_core_process_block_component_testimonial_carousel(&$variables) {
   $block = $variables['content']['#block_content'];
-  $variables['content']['#prefix'] = '<div id="testimonialCarouselContainer" class="testimonial-carousel-container"></div>';
-
   $rand_id = random_int(0, PHP_INT_MAX);
+  $variables['content']['#prefix'] = '<div id="testimonialCarouselContainer' . $rand_id   . '" class="testimonial-carousel-container"></div>';
+
+
   $variables['attributes']['class'][] = 'asu-testimonial-carousel-container';
 
   // Purposely not using Html::getUniqueId().
@@ -179,7 +180,7 @@ function asu_react_core_process_block_component_card_arrangement(&$variables) {
   $card_arrangement = new \stdClass();
   $card_arrangement->items = [];
 
-  if ($block->field_card_group && $block->field_card_group->target_id) {
+  if ($block->field_card_group && $block->field_card_group->entity) {
     foreach ($block->field_card_group->entity->field_cards as $paragraph_ref) {
       $card_arrangement->items[] = $paragraph_ref->entity->uuid();
     }
