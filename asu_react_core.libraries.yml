@@ -44,3 +44,9 @@ card-arrangement:
     - asu_react_core/react-core
   js:
     js/component-card-arrangement.js: { }
+testimonial:
+  version: 0.0.1
+  dependencies:
+    - asu_react_core/react-core
+  js:
+    js/component-testimonial.js: {}
