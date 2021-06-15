@@ -373,7 +373,9 @@ function _asu_react_core_get_card_content($paragraph) {
   }
 
   if (isset($paragraph->field_icon)) {
-    $card->icon = $paragraph->field_icon->icon_name;
+    $icon_name = $paragraph->field_icon->icon_name;
+    $icon_style = $paragraph->field_icon->style;
+    $card->icon = [$icon_style, $icon_name];
   }
 
   $settings = [];
