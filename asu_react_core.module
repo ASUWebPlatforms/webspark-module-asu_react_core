@@ -180,7 +180,7 @@ function asu_react_core_process_block_component_card_arrangement(&$variables) {
   $card_arrangement = new \stdClass();
   $card_arrangement->items = [];
 
-  if ($block->field_card_group && $block->field_card_group->target_id) {
+  if ($block->field_card_group && $block->field_card_group->entity) {
     foreach ($block->field_card_group->entity->field_cards as $paragraph_ref) {
       $card_arrangement->items[] = $paragraph_ref->entity->uuid();
     }
