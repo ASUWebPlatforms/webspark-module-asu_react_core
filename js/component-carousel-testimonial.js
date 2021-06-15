@@ -18,7 +18,7 @@
         });
 
         AsuWebCarousel.initTestimonialCarousel({
-          targetSelector: "#testimonialCarouselContainer",
+          targetSelector: "#testimonialCarouselContainer" + testimonialId,
           props: {
             testimonialItems: testimonials,
             maxWidth: "500px",
