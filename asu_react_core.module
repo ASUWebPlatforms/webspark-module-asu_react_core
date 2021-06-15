@@ -58,9 +58,6 @@ function asu_react_core_process_block_component_testimonial_carousel(&$variables
   if ($block->field_accent_color->value) {
     $testimonial_carousel->style[] = $block->field_accent_color->value;
   }
-  if ($block->field_citation_style->value) {
-    $testimonial_carousel->style[] = $block->field_citation_style->value;
-  }
   if ($block->field_heading_highlight->value) {
     $testimonial_carousel->itemTitleCssClass[] = $block->field_heading_highlight->value;
   }
@@ -76,6 +73,40 @@ function asu_react_core_process_block_component_testimonial_carousel(&$variables
 
   $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
   $variables['content']['#attached']['library'][] = 'asu_react_core/testimonial-carousel';
+}
+
+function asu_react_core_process_block_component_testimonial(&$variables) {
+  $block = $variables['content']['#block_content'];
+  $variables['content']['#prefix'] = '<div id="testimonialContainer" class="testimonial-container"></div>';
+
+  $rand_id = random_int(0, PHP_INT_MAX);
+  $variables['attributes']['class'][] = 'asu-testimonial-carousel-container';
+
+  // Purposely not using Html::getUniqueId().
+  $variables['attributes']['id'] = 'asu-testimonial-container-' . $rand_id;
+
+  $testimonial_block = new \stdClass();
+  $testimonial_block->items = [];
+  $testimonial_block->style = [];
+  $testimonial_block->itemTitleCssClass = [];
+
+
+  if ($block->field_accent_color->value) {
+    $testimonial_block->style[] = $block->field_accent_color->value;
+  }
+  if ($block->field_heading_highlight->value) {
+    $testimonial_block->itemTitleCssClass[] = $block->field_heading_highlight->value;
+  }
+
+  foreach ($block->field_testimonial_component as $paragraph_ref) {
+    $testimonial_block->items[] = $paragraph_ref->entity->uuid();
+  }
+
+  $settings = [];
+  $settings['components']['testimonialblock'][$rand_id] = $testimonial_block;
+
+  $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
+  $variables['content']['#attached']['library'][] = 'asu_react_core/testimonial';
 }
 
 function asu_react_core_process_component_testimonial(&$variables) {
