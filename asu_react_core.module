@@ -3,6 +3,7 @@
 use Drupal\Core\Url;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\taxonomy\Entity\Term;
+use Drupal\asu_react_core\ComponentFactory;
 
 /**
  * Implements hook_preprocess_HOOK().
@@ -29,85 +30,10 @@ function asu_react_core_preprocess_block(&$variables) {
   }
 
   $type = $variables['derivative_plugin_id'];
-
-  $component_builder = 'asu_react_core_process_block_component_' . $type;
-
-  if (function_exists($component_builder)) {
-    call_user_func_array($component_builder, [&$variables]);
+  $component = ComponentFactory::load($type, $variables);
+  if ($component) {
+    $component->buildSettings($variables);
   }
-}
-
-function asu_react_core_process_block_component_testimonial_carousel(&$variables) {
-  $block = $variables['content']['#block_content'];
-  $rand_id = random_int(0, PHP_INT_MAX);
-  $variables['content']['#prefix'] = '<div id="testimonialCarouselContainer' . $rand_id   . '" class="testimonial-carousel-container"></div>';
-
-
-  $variables['attributes']['class'][] = 'asu-testimonial-carousel-container';
-
-  // Purposely not using Html::getUniqueId().
-  $variables['attributes']['id'] = 'asu-testimonial-carousel-container-' . $rand_id;
-
-  $testimonial_carousel = new \stdClass();
-  $testimonial_carousel->items = [];
-  $testimonial_carousel->style = ['with-image'];
-  $testimonial_carousel->itemTitleCssClass = [];
-
-  if ($block->field_text_color->value) {
-    $testimonial_carousel->style[] = $block->field_text_color->value;
-  }
-  if ($block->field_accent_color->value) {
-    $testimonial_carousel->style[] = $block->field_accent_color->value;
-  }
-  if ($block->field_heading_highlight->value) {
-    $testimonial_carousel->itemTitleCssClass[] = $block->field_heading_highlight->value;
-  }
-
-  $block->field_testimonial->getValue();
-
-  foreach ($block->field_testimonial as $paragraph_ref) {
-    $testimonial_carousel->items[] = $paragraph_ref->entity->uuid();
-  }
-
-  $settings = [];
-  $settings['components'][$block->bundle()][$rand_id] = $testimonial_carousel;
-
-  $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
-  $variables['content']['#attached']['library'][] = 'asu_react_core/testimonial-carousel';
-}
-
-function asu_react_core_process_block_component_testimonial(&$variables) {
-  $block = $variables['content']['#block_content'];
-  $variables['content']['#prefix'] = '<div id="testimonialContainer" class="testimonial-container"></div>';
-
-  $rand_id = random_int(0, PHP_INT_MAX);
-  $variables['attributes']['class'][] = 'asu-testimonial-carousel-container';
-
-  // Purposely not using Html::getUniqueId().
-  $variables['attributes']['id'] = 'asu-testimonial-container-' . $rand_id;
-
-  $testimonial_block = new \stdClass();
-  $testimonial_block->items = [];
-  $testimonial_block->style = [];
-  $testimonial_block->itemTitleCssClass = [];
-
-
-  if ($block->field_accent_color->value) {
-    $testimonial_block->style[] = $block->field_accent_color->value;
-  }
-  if ($block->field_heading_highlight->value) {
-    $testimonial_block->itemTitleCssClass[] = $block->field_heading_highlight->value;
-  }
-
-  foreach ($block->field_testimonial_component as $paragraph_ref) {
-    $testimonial_block->items[] = $paragraph_ref->entity->uuid();
-  }
-
-  $settings = [];
-  $settings['components']['testimonialblock'][$rand_id] = $testimonial_block;
-
-  $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
-  $variables['content']['#attached']['library'][] = 'asu_react_core/testimonial';
 }
 
 function asu_react_core_process_component_testimonial(&$variables) {
@@ -138,59 +64,12 @@ function asu_react_core_process_component_testimonial(&$variables) {
 
   if ($paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
     $testimonial->imageSource = file_create_url($paragraph->field_media->entity->field_media_image->entity->getFileUri());
-    $testimonial->altText = $paragraph->field_media->entity->field_media_image->alt;
+    $testimonial->imageAltText = $paragraph->field_media->entity->field_media_image->alt;
   }
 
   $settings = [];
   $settings['components'][$paragraph->bundle()][$id] = $testimonial;
   $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
-}
-
-function asu_react_core_process_block_component_carousel_image(&$variables) {
-  $block = $variables['content']['#block_content'];
-  $variables['content']['#prefix'] = '<div id="imageCarouselContainer"></div>';
-
-  $rand_id = random_int(0, PHP_INT_MAX);
-  $variables['attributes']['class'][] = 'asu-image-carousel-container';
-  $variables['attributes']['id'] = 'asu-image-carousel-container-' . $rand_id;
-
-  $settings = _asu_core_get_images_items($block, $rand_id);
-  $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
-  $variables['content']['#attached']['library'][] = 'asu_react_core/image-carousel';
-
-}
-
-function asu_react_core_process_block_component_gallery(&$variables) {
-  $block = $variables['content']['#block_content'];
-  $variables['content']['#prefix'] = '<div id="imageGalleryCarouselContainer"></div>';
-
-  $rand_id = random_int(0, PHP_INT_MAX);
-  $variables['attributes']['class'][] = 'asu-gallery-carousel-container';
-  $variables['attributes']['id'] = 'asu-gallery-carousel-container-' . $rand_id;
-
-  $settings = _asu_core_get_images_items($block, $rand_id);
-  $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
-  $variables['content']['#attached']['library'][] = 'asu_react_core/image_gallery_carousel';
-}
-
-function asu_react_core_process_block_component_card_arrangement(&$variables) {
-  $block = $variables['content']['#block_content'];
-
-  $rand_id = random_int(0, PHP_INT_MAX);
-  $card_arrangement = new \stdClass();
-  $card_arrangement->items = [];
-
-  if ($block->field_card_group && $block->field_card_group->entity) {
-    foreach ($block->field_card_group->entity->field_cards as $paragraph_ref) {
-      $card_arrangement->items[] = $paragraph_ref->entity->uuid();
-    }
-  }
-
-  $settings = [];
-  $settings['components'][$block->bundle()][$rand_id] = $card_arrangement;
-  $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
-  $variables['content']['#attached']['library'][] = 'asu_react_core/card-arrangement';
-
 }
 
 function asu_react_core_process_component_gallery_image(&$variables) {
@@ -203,7 +82,7 @@ function asu_react_core_process_component_gallery_image(&$variables) {
 
   if ($paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
     $image->imageSource = file_create_url($paragraph->field_media->entity->field_media_image->entity->getFileUri());
-    $image->altText = $paragraph->field_media->entity->field_media_image->alt;
+    $image->imageAltText = $paragraph->field_media->entity->field_media_image->alt;
   }
   if ($paragraph->field_formatted_text) {
     $image->content = $paragraph->field_formatted_text->value;
@@ -217,181 +96,27 @@ function asu_react_core_process_component_gallery_image(&$variables) {
   $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
 }
 
-function asu_react_core_process_block_component_card_carousel(&$variables) {
-  $block = $variables['content']['#block_content'];
-  $variables['content']['#prefix'] = '<div id="cardCarouselContainer"></div>';
-
-  $rand_id = random_int(0, PHP_INT_MAX);
-  $block_id = 'asu-card-carousel-container-' . $rand_id;
-  $variables['attributes']['class'][] = 'asu-card-carousel-container';
-
-  $variables['attributes']['id'] = $block_id;
-
-
-  $card_carousel = new \stdClass();
-  $card_carousel->targetSelector = $block_id;
-  $card_carousel->items = [];
-
-  if ($block->field_card_orientation) {
-    $card_carousel->cardHorizontal = (bool) $block->field_card_orientation->value;
-  }
-  if ($block->field_layout) {
-    $card_carousel->perView = $block->field_layout->value;
-  }
-
-  foreach ($block->field_card_group->entity->field_cards as $paragraph_ref) {
-    $card_carousel->items[] = $paragraph_ref->entity->uuid();
-  }
-
-  if ($block->field_card_group && $block->field_card_group->entity) {
-    $group_type = $block->field_card_group->entity->bundle();
-    switch ($group_type) {
-      case 'card_group_default':
-        $card_carousel->cardType = 'default';
-        break;
-      case 'card_group_degree':
-        $card_carousel->cardType = 'degree';
-        break;
-      case 'card_group_story':
-        $card_carousel->cardType = 'story';
-        break;
-    }
-  }
-
-  $settings = [];
-  $settings['components'][$block->bundle()][$rand_id] = $card_carousel;
-
-  $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
-  $variables['content']['#attached']['library'][] = 'asu_react_core/card_carousel';
-}
-
 function asu_react_core_process_component_card(&$variables) {
   $paragraph = $variables['paragraph'];
-  $settings = _asu_react_core_get_card_content($paragraph);
+  $settings = \Drupal::service('asu_react_core.helper_functions')->getCardContent($paragraph);
   $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
 }
 
 function asu_react_core_process_component_card_degree(&$variables) {
   $paragraph = $variables['paragraph'];
-  $settings = _asu_react_core_get_card_content($paragraph);
+  $settings = \Drupal::service('asu_react_core.helper_functions')->getCardContent($paragraph);
   $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
 }
 
 function asu_react_core_process_component_card_story(&$variables) {
   $paragraph = $variables['paragraph'];
-  $settings = _asu_react_core_get_card_content($paragraph);
+  $settings = \Drupal::service('asu_react_core.helper_functions')->getCardContent($paragraph);
   $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
 }
 
 function asu_react_core_process_component_card_with_icon(&$variables) {
   $paragraph = $variables['paragraph'];
-  $settings = _asu_react_core_get_card_content($paragraph);
+  $settings = \Drupal::service('asu_react_core.helper_functions')->getCardContent($paragraph);
   $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
 }
 
-function _asu_core_get_images_items($block, $rand_id) {
-  $image_carousel = new \stdClass();
-  $image_carousel->items = [];
-
-  if ($block->field_type) {
-    $image_carousel->type = $block->field_type->value;
-  }
-
-  foreach ($block->field_carousel_card as $paragraph_ref) {
-    $image_carousel->items[] = $paragraph_ref->entity->uuid();
-  }
-
-  $settings = [];
-  $settings['components'][$block->bundle()][$rand_id] = $image_carousel;
-
-  return $settings;
-}
-
-function _asu_react_core_get_card_content($paragraph) {
-  if (empty($paragraph)) {
-    return;
-  }
-  $id = $paragraph->uuid();
-  $card = new \stdClass();
-  $card->id = $id;
-
-  switch ($paragraph->getType()) {
-    case 'card':
-    case 'card_with_icon':
-      $card->cardType = 'default';
-      break;
-    case 'card_degree':
-      $card->cardType = 'degree';
-      break;
-    case 'card_event':
-      $card->cardType = 'event';
-      break;
-    case 'card_story':
-      $card->cardType = 'story';
-      break;
-  }
-
-  if ($paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
-    $card->imageSource = file_create_url($paragraph->field_media->entity->field_media_image->entity->getFileUri());
-    $card->imageAltText = $paragraph->field_media->entity->field_media_image->alt;
-  }
-  if ($paragraph->field_heading->value) {
-    $card->title = $paragraph->field_heading->value;
-  }
-  if ($paragraph->field_body->value) {
-    $card->content = $paragraph->field_body->value;
-  }
-  if ($paragraph->field_cta && $paragraph->field_cta->entity) {
-    $cta = new \stdClass();
-    $cta->label = $paragraph->field_cta->entity->field_cta_link->title;
-    $link = Url::fromUri($paragraph->field_cta->entity->field_cta_link->uri);
-    $cta->href = $link->toString();
-    $color = _asu_core_get_button_color($paragraph->field_cta->entity->field_cta_link->options,'maroon' );
-    $cta->color = $color;
-    $cta->size = 'default';
-    $card->buttons[] = $cta;
-  }
-  if ($paragraph->field_cta_secondary && $paragraph->field_cta_secondary->entity) {
-    $cta = new \stdClass();
-    $cta->label = $paragraph->field_cta_secondary->entity->field_cta_link->title;
-    $link = Url::fromUri($paragraph->field_cta_secondary->entity->field_cta_link->uri);
-    $cta->href = $link->toString();
-    $color = _asu_core_get_button_color($paragraph->field_cta_secondary->entity->field_cta_link->options,'gold' );
-    $cta->color = $color;
-    $cta->size = 'small';
-    $card->buttons[] = $cta;
-  }
-  if ($paragraph->field_link && $paragraph->field_link->title && $paragraph->field_link->uri) {
-    $card->linkLabel = $paragraph->field_link->title;
-    $link = Url::fromUri($paragraph->field_link->uri);
-    $card->linkUrl = $link->toString();
-  }
-  foreach ($paragraph->field_tags as $term) {
-    $tag = new \stdClass();
-    $tag->label = $term->entity->name->value;
-    $tag->href = Url::fromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $term->entity->tid->value]);
-    $card->tags[] = $tag;
-  }
-
-  if (isset($paragraph->field_icon)) {
-    $icon_name = $paragraph->field_icon->icon_name;
-    $icon_style = $paragraph->field_icon->style;
-    $card->icon = [$icon_style, $icon_name];
-  }
-
-  $settings = [];
-  $settings['components']['card'][$id] = $card;
-
-  return $settings;
-}
-
-function _asu_core_get_button_color($options, $default) {
-  $color = $default;
-  if (isset($options['attributes']['class'])) {
-    //class structure from custom widget 'btn-size btn-color btn'
-    $class = explode( ' ', $options['attributes']['class']);
-    $color = substr($class[1], 4);
-  }
-  return $color;
-
-}

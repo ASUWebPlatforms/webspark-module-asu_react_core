@@ -50,3 +50,9 @@ testimonial:
     - asu_react_core/react-core
   js:
     js/component-testimonial.js: {}
+card:
+  version: 0.0.1
+  dependencies:
+    - asu_react_core/react-core
+  js:
+    js/component-card.js: { }
