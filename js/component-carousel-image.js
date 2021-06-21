@@ -18,7 +18,7 @@
         var type = carouselData.type
         // Setup and initialize the Image carousel.
         AsuWebCarousel.initImageCarousel({
-          targetSelector: "#imageCarouselContainer",
+          targetSelector: "#imageCarouselContainer" + imageId,
           props: {
             perView: "2",
             imageItems: images,

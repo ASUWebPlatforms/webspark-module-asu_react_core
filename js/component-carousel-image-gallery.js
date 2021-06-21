@@ -17,7 +17,7 @@
 
         var type = carouselData.type
          AsuWebCarousel.initImageGalleryCarousel({
-            targetSelector: "#imageGalleryCarouselContainer",
+            targetSelector: "#imageGalleryCarouselContainer" + imageId,
             props: {
               perView: "2",
               imageItems: images,
