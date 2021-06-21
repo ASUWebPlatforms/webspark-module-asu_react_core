@@ -26,7 +26,10 @@
               title: card.title,
               body: card.content,
               buttons: card.buttons,
-              icon: card.icon
+              icon: card.icon,
+              linkLabel: card.linkLabel,
+              linkUrl: card.linkUrl,
+              tags: card.tags,
             },
           });
 	      });
