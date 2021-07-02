@@ -19,6 +19,9 @@ class ReactComponentTestimonial implements ReactComponent {
     $testimonial_block->itemTitleCssClass = [];
 
 
+    if ($block->field_text_color->value) {
+      $testimonial_block->style[] = $block->field_text_color->value;
+    }
     if ($block->field_accent_color->value) {
       $testimonial_block->style[] = $block->field_accent_color->value;
     }
