@@ -99,6 +99,12 @@ class ReactComponentHelperFunctions {
       $card->icon = [$icon_style, $icon_name];
     }
 
+    $card->clickable = false;
+    if ($paragraph->field_clickable->value && isset($paragraph->field_card_link)){
+      $card->clickable = true;
+      $card->clickHref = $paragraph->field_card_link->value;
+    }
+
     $settings = [];
     $settings['components']['card'][$id] = $card;
 

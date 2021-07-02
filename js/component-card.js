@@ -19,7 +19,8 @@
           props: {
             type: card.cardType,
             horizontal: false,
-            clickable: false,
+            clickable: card.clickable,
+            clickHref: card.clickHref,
             image: card.imageSource,
             imageAltText: card.imageAltText,
             title: card.title,
