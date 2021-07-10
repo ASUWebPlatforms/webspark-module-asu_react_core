@@ -20,11 +20,14 @@ class ComponentFactory {
       'card_carousel' => '\Drupal\asu_react_core\ReactComponentCardCarousel',
       'testimonial_carousel' => '\Drupal\asu_react_core\ReactComponentTestimonialCarousel',
       'carousel_image' => '\Drupal\asu_react_core\ReactComponentCarouselImage',
-      'gallery' => '\Drupal\asu_react_core\ReactComponentImageGallery'
-
+      'gallery' => '\Drupal\asu_react_core\ReactComponentImageGallery',
     ];
 
-    $classname =  $types[$id];
+    if (!in_array($id, array_keys($types))) {
+      return;
+    }
+
+    $classname = $types[$id];
     if ($classname) {
       return new $classname($variables);
     }
