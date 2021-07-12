@@ -21,6 +21,7 @@ class ComponentFactory {
       'testimonial_carousel' => '\Drupal\asu_react_core\ReactComponentTestimonialCarousel',
       'carousel_image' => '\Drupal\asu_react_core\ReactComponentCarouselImage',
       'gallery' => '\Drupal\asu_react_core\ReactComponentImageGallery',
+      'testimonial_on_image_background' => '\Drupal\asu_react_core\ReactComponentTestimonialOnImageBackground'
     ];
 
     if (!in_array($id, array_keys($types))) {
