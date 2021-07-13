@@ -51,7 +51,7 @@ class ReactComponentHelperFunctions {
         break;
     }
 
-    if ($paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
+    if ($paragraph->field_media && $paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
       $card->imageSource = file_create_url($paragraph->field_media->entity->field_media_image->entity->getFileUri());
       $card->imageAltText = $paragraph->field_media->entity->field_media_image->alt;
     }
@@ -86,11 +86,13 @@ class ReactComponentHelperFunctions {
       $link = Url::fromUri($paragraph->field_link->uri);
       $card->linkUrl = $link->toString();
     }
-    foreach ($paragraph->field_tags as $term) {
-      $tag = new \stdClass();
-      $tag->label = $term->entity->name->value;
-      $tag->href = Url::fromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $term->entity->tid->value]);
-      $card->tags[] = $tag;
+    if (!empty($paragraph->field_tags)) {
+      foreach ($paragraph->field_tags as $term) {
+        $tag = new \stdClass();
+        $tag->label = $term->entity->name->value;
+        $tag->href = Url::fromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $term->entity->tid->value]);
+        $card->tags[] = $tag;
+      }
     }
 
     if (isset($paragraph->field_icon)) {
