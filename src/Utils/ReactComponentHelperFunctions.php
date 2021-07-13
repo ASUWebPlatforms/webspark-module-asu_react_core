@@ -66,7 +66,11 @@ class ReactComponentHelperFunctions {
       $cta->label = $paragraph->field_cta->entity->field_cta_link->title;
       $link = Url::fromUri($paragraph->field_cta->entity->field_cta_link->uri);
       $cta->href = $link->toString();
-      $color = $this->getButtonColor($paragraph->field_cta->entity->field_cta_link->options,'maroon' );
+      $options = $paragraph->field_cta->entity->field_cta_link->options;
+      $color = $this->getButtonColor($options,'maroon' );
+      if (isset($options['attributes']['target'])) {
+        $cta->target = $options['attributes']['target'];
+      }
       $cta->color = $color;
       $cta->size = 'default';
       $card->buttons[] = $cta;
@@ -76,7 +80,11 @@ class ReactComponentHelperFunctions {
       $cta->label = $paragraph->field_cta_secondary->entity->field_cta_link->title;
       $link = Url::fromUri($paragraph->field_cta_secondary->entity->field_cta_link->uri);
       $cta->href = $link->toString();
-      $color = $this->getButtonColor($paragraph->field_cta_secondary->entity->field_cta_link->options,'gold' );
+      $options = $paragraph->field_cta_secondary->entity->field_cta_link->options;
+      $color = $this->getButtonColor($options,'gold' );
+      if (isset($options['attributes']['target'])) {
+        $cta->target = $options['attributes']['target'];
+      }
       $cta->color = $color;
       $cta->size = 'small';
       $card->buttons[] = $cta;

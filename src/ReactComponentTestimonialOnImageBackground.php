@@ -2,15 +2,15 @@
 
 namespace Drupal\asu_react_core;
 
-class ReactComponentTestimonial implements ReactComponent {
+class ReactComponentTestimonialOnImageBackground implements ReactComponent {
 
   public function buildSettings(&$variables) {
     $block = $variables['content']['#block_content'];
 
     $rand_id = random_int(0, PHP_INT_MAX);
-    $variables['attributes']['class'][] = 'asu-testimonial-container';
+    $variables['attributes']['class'][] = 'asu-testimonial-on-image-container';
 
-    $variables['attributes']['id'] = 'asu-testimonial-container-' . $rand_id;
+    $variables['attributes']['id'] = 'asu-testimonial-on-image-container-' . $rand_id;
 
     $testimonial_block = new \stdClass();
     $testimonial_block->items = [];
@@ -33,9 +33,10 @@ class ReactComponentTestimonial implements ReactComponent {
     }
 
     $settings = [];
-    $settings['components']['testimonialblock'][$rand_id] = $testimonial_block;
+    $settings['components'][$block->bundle()][$rand_id] = $testimonial_block;
 
     $variables['content']['#attached']['drupalSettings']['asu'] = $settings;
-    $variables['content']['#attached']['library'][] = 'asu_react_core/testimonial';
+    $variables['content']['#attached']['library'][] = 'asu_react_core/testimonial-on-image-background';
   }
 }
+//testimonial_on_image_background

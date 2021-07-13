@@ -1,6 +1,6 @@
 (function ($, Drupal, drupalSettings) {
 
-  Drupal.behaviors.cardArrangement = {
+  Drupal.behaviors.card = {
     attach: function (context, settings) {
       var componentLoaded = typeof AsuWebCore !== "undefined" && typeof AsuWebCore.initCard !== "undefined";
       var cardExist = typeof settings.asu !== "undefined" && typeof settings.asu.components !== "undefined" && typeof settings.asu.components.content_section !== "undefined";
