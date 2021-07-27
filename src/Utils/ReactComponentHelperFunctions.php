@@ -110,9 +110,10 @@ class ReactComponentHelperFunctions {
     }
 
     $card->clickable = false;
-    if ($paragraph->field_clickable->value && isset($paragraph->field_card_link)){
+    if ($paragraph->field_clickable->value && isset($paragraph->field_card_link->uri)){
       $card->clickable = true;
-      $card->clickHref = $paragraph->field_card_link->value;
+      $link = Url::fromUri($paragraph->field_card_link->uri);
+      $card->clickHref = $link->toString();
     }
 
     $settings = [];
