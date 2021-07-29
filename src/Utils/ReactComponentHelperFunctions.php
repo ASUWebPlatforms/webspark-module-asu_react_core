@@ -94,14 +94,17 @@ class ReactComponentHelperFunctions {
       $link = Url::fromUri($paragraph->field_link->uri);
       $card->linkUrl = $link->toString();
     }
-    if (!empty($paragraph->field_tags)) {
+    //@TODO We are not going to send this information to the react component,
+    // since the functionality in webspark for the tags has not yet been defined
+    /*if (!empty($paragraph->field_tags)) {
       foreach ($paragraph->field_tags as $term) {
         $tag = new \stdClass();
         $tag->label = $term->entity->name->value;
-        $tag->href = Url::fromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $term->entity->tid->value]);
+        $link = Url::fromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $term->entity->tid->value]);
+        $tag->href = $link->toString();
         $card->tags[] = $tag;
       }
-    }
+    }*/
 
     if (isset($paragraph->field_icon)) {
       $icon_name = $paragraph->field_icon->icon_name;
