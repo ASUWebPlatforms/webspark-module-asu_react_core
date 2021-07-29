@@ -9,5 +9,6 @@
       "email": "artem.vasiatkin@deptagency.com"
     }
   ],
-  "require": {}
+  "require": {},
+  "version": "1.0.1"
 }
