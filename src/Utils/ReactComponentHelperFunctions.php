@@ -3,6 +3,8 @@
 namespace Drupal\asu_react_core\Utils;
 
 use Drupal\Core\Url;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\crop\Entity\Crop;
 
 /**
  * Class ReactComponentHelperFunctionss.
@@ -52,7 +54,22 @@ class ReactComponentHelperFunctions {
     }
 
     if ($paragraph->field_media && $paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
-      $card->imageSource = file_create_url($paragraph->field_media->entity->field_media_image->entity->getFileUri());
+      $uri = $paragraph->field_media->entity->field_media_image->entity->getFileUri();
+
+      $image_source = NULL;
+      if (Crop::cropExists($uri, 'images_block')) {
+        $style = ImageStyle::load('block_image_med');
+        if ($style) {
+          $image_source = $style->buildUrl($uri);
+        }
+      }
+
+      if (!$image_source) {
+        // Load default image.
+        $image_source = file_create_url($uri);
+      }
+
+      $card->imageSource = $image_source;
       $card->imageAltText = $paragraph->field_media->entity->field_media_image->alt;
     }
     if ($paragraph->field_heading->value) {

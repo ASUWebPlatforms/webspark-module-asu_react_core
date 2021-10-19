@@ -1,8 +1,5 @@
 <?php
 
-use Drupal\Core\Url;
-use Drupal\paragraphs\Entity\Paragraph;
-use Drupal\taxonomy\Entity\Term;
 use Drupal\asu_react_core\ComponentFactory;
 
 /**
