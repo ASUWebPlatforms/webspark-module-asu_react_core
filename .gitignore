@@ -1,4 +1,6 @@
-node_modules/@asu-design-system
+!node_modules
+node_modules/*
+
 !node_modules/@asu-design-system
 node_modules/@asu-design-system/*
 !node_modules/@asu-design-system/component-carousel
@@ -13,3 +15,8 @@ node_modules/@asu-design-system/components-core/*
 !node_modules/@asu-design-system/components-core/dist
 node_modules/@asu-design-system/components-core/dist/*
 !node_modules/@asu-design-system/components-core/dist/libCore.min.js
+
+!node_modules/@asu-design-system/components-library
+node_modules/@asu-design-system/components-library/*
+
+!node_modules/@asu-design-system/components-library/dist
