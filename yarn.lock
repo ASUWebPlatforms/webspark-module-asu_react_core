@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@asu-design-system/component-carousel@^1.13.2":
-  version "1.13.2"
-  resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponent-carousel/-/component-carousel-1.13.2.tgz#abcb6c223f1aad80bd06605c8ce320dde857fe95"
-  integrity sha512-Gl5UyfXOuDzKGt7Yu8IwDKqBQuW89ORKNTJz5XF+31sekHmI+ebqFhRLj1Cvx6TlB+m1LDzS+nezxX/cOYOZLw==
+"@asu-design-system/component-carousel@^1.13.3":
+  version "1.13.3"
+  resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponent-carousel/-/component-carousel-1.13.3.tgz#4f13874dc605ea34fbfa757df62d92c65901f2a8"
+  integrity sha512-k+uMtV846714/IV9XI9rrGZ6dFE9gZkn5KB6jbrBZNeIWLt52O+wAXbQSQquDBpwlYeyxE9J1a/LO1UW1SHBbQ==
   dependencies:
     "@asu-design-system/components-core" "^1.0.0"
     "@asu-design-system/design-tokens" "^1.1.0"
