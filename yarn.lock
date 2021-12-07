@@ -37,19 +37,6 @@
     url-loader "^4.1.1"
     webpack-node-externals "^3.0.0"
 
-"@asu-design-system/components-core@1.19.0":
-  version "1.19.0"
-  resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponents-core/-/components-core-1.19.0.tgz#c39c302cb19a25263765d32b9c8ded76b32957ff"
-  integrity sha512-Zo2PJWnFkbJKGc8AiA57vd4FY8mvs2oBlFa6YQoYoZEKobXbXN2Lh3wjEp1R6L2ktzrs37rPkJEpH6FTE4VaXw==
-  dependencies:
-    "@storybook/addon-knobs" "^6.2.9"
-    classnames "^2.2.6"
-    date-fns "^2.19.0"
-    dompurify "^2.2.7"
-    phone-fns "^3.2.3"
-    prop-types "^15.7.2"
-    styled-components "^5.3.0"
-
 "@asu-design-system/components-core@^1.0.0":
   version "1.0.0"
   resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponents-core/-/components-core-1.0.0.tgz#da6d3b1fb4801f30d9454317a82c360e8be547f2"
@@ -71,6 +58,19 @@
     react-router-dom "^5.2.0"
     react-share "^4.4.0"
     reactstrap "^8.9.0"
+
+"@asu-design-system/components-core@^1.19.0":
+  version "1.19.0"
+  resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponents-core/-/components-core-1.19.0.tgz#c39c302cb19a25263765d32b9c8ded76b32957ff"
+  integrity sha512-Zo2PJWnFkbJKGc8AiA57vd4FY8mvs2oBlFa6YQoYoZEKobXbXN2Lh3wjEp1R6L2ktzrs37rPkJEpH6FTE4VaXw==
+  dependencies:
+    "@storybook/addon-knobs" "^6.2.9"
+    classnames "^2.2.6"
+    date-fns "^2.19.0"
+    dompurify "^2.2.7"
+    phone-fns "^3.2.3"
+    prop-types "^15.7.2"
+    styled-components "^5.3.0"
 
 "@asu-design-system/design-tokens@^1.1.0":
   version "1.1.8"
