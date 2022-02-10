@@ -10,8 +10,11 @@ node_modules/@asu-design-system/component-carousel/dist/*
 !node_modules/@asu-design-system/component-carousel/dist/carousel.production.js
 !node_modules/@asu-design-system/component-carousel/dist/core.production.js
 !node_modules/@asu-design-system/component-carousel/dist/vendor.production.js
+!node_modules/@asu-design-system/component-carousel/dist/asuCarousel.umd.js
+!node_modules/@asu-design-system/component-carousel/dist/vendor.umd.js
 !node_modules/@asu-design-system/components-core
 node_modules/@asu-design-system/components-core/*
 !node_modules/@asu-design-system/components-core/dist
 node_modules/@asu-design-system/components-core/dist/*
 !node_modules/@asu-design-system/components-core/dist/libCore.min.js
+!node_modules/@asu-design-system/components-core/dist/libCore.umd.js
