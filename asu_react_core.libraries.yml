@@ -6,14 +6,14 @@ react-core:
     - core/drupalSettings
     - asu_react_integration/reactjs
   js:
-    node_modules/@asu-design-system/components-core/dist/libCore.min.js: {}
+    node_modules/@asu-design-system/components-core/dist/libCore.umd.js: {}
 react-carousel:
   version: 0.0.1
   dependencies:
     - asu_react_core/react-core
   js:
-    node_modules/@asu-design-system/component-carousel/dist/vendor.production.js: { }
-    node_modules/@asu-design-system/component-carousel/dist/carousel.production.js: {}
+    node_modules/@asu-design-system/component-carousel/dist/vendor.umd.js: { }
+    node_modules/@asu-design-system/component-carousel/dist/asuCarousel.umd.js: {}
 testimonial-carousel:
   version: 0.0.1
   dependencies:
