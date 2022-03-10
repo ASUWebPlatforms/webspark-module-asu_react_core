@@ -9,7 +9,7 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@asu-design-system/component-carousel@^1.13.3":
+"@asu-design-system/component-carousel@1.15.0":
   version "1.15.0"
   resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponent-carousel/-/component-carousel-1.15.0.tgz#aefa741381cf45bb5afb16aa92fbf918d350d912"
   integrity sha512-LBQzrFjbg6wC1jMq9NtoGMhBMtSiIY9UHYBDw72jReUvhUX/b4Mb8CAOhzsGvBtc8BkLuS4IHJ7ZIkEj8SHnBQ==
@@ -44,6 +44,19 @@
     url-loader "^4.1.1"
     webpack-node-externals "^3.0.0"
 
+"@asu-design-system/components-core@1.25.0":
+  version "1.25.0"
+  resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponents-core/-/components-core-1.25.0.tgz#5a80bb716ad4cca1475328b3cbb46d0efc969ec8"
+  integrity sha512-p4UjK0gT9ZVEBEZbm4ErGVah+IdmVTBiIRunzr0vXoSadJkhMJo9y63OS7clOve6V4qwx85vvDjoM5cGbwz6KA==
+  dependencies:
+    "@storybook/addon-knobs" "^6.2.9"
+    classnames "^2.2.6"
+    date-fns "^2.19.0"
+    dompurify "^2.2.7"
+    phone-fns "^3.2.3"
+    prop-types "^15.7.2"
+    styled-components "^5.3.0"
+
 "@asu-design-system/components-core@^1.0.0":
   version "1.0.0"
   resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponents-core/-/components-core-1.0.0.tgz#da6d3b1fb4801f30d9454317a82c360e8be547f2"
@@ -65,19 +78,6 @@
     react-router-dom "^5.2.0"
     react-share "^4.4.0"
     reactstrap "^8.9.0"
-
-"@asu-design-system/components-core@^1.19.0":
-  version "1.23.0"
-  resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponents-core/-/components-core-1.23.0.tgz#ed746e9bab2c92caf07da6581f83c05c9237af1a"
-  integrity sha512-Dnuiw+FhNLIHuaUuSajHk6I1Wfmrvqed7w8l2I4bwb79k/V9fkHWDHRp7MspXwfFb7pe+ynebPVnlI0r/o4HsQ==
-  dependencies:
-    "@storybook/addon-knobs" "^6.2.9"
-    classnames "^2.2.6"
-    date-fns "^2.19.0"
-    dompurify "^2.2.7"
-    phone-fns "^3.2.3"
-    prop-types "^15.7.2"
-    styled-components "^5.3.0"
 
 "@asu-design-system/design-tokens@^1.1.0":
   version "1.1.8"
