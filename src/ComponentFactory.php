@@ -7,11 +7,10 @@ namespace Drupal\asu_react_core;
 class ComponentFactory {
 
   /**
-   * @param $id
-   * @param $variables
+   * @param string $id
    * @return ReactComponent
    */
-  static public function load($id, $variables) {
+  static public function load(string $id) {
     $types = [
       'card_and_image' => '\Drupal\asu_react_core\ReactComponentCardAndImage',
       'card_image_and_content' => '\Drupal\asu_react_core\ReactComponentCardAndImage',
@@ -30,7 +29,7 @@ class ComponentFactory {
 
     $classname = $types[$id];
     if ($classname) {
-      return new $classname($variables);
+      return new $classname();
     }
   }
 }
