@@ -66,7 +66,7 @@ class ReactComponentHelperFunctions {
 
       if (!$image_source) {
         // Load default image.
-        $image_source = file_create_url($uri);
+        $image_source = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
       }
 
       $card->imageSource = $image_source;

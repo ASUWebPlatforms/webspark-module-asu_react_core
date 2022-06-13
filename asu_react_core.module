@@ -27,7 +27,7 @@ function asu_react_core_preprocess_block(&$variables) {
   }
 
   $type = $variables['derivative_plugin_id'];
-  $component = ComponentFactory::load($type, $variables);
+  $component = ComponentFactory::load($type);
   if ($component) {
     $component->buildSettings($variables);
   }
@@ -60,7 +60,8 @@ function asu_react_core_process_component_testimonial(&$variables) {
   $testimonial->quote = $quote;
 
   if ($paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
-    $testimonial->imageSource = file_create_url($paragraph->field_media->entity->field_media_image->entity->getFileUri());
+    $imageUri = $paragraph->field_media->entity->field_media_image->entity->getFileUri();
+    $testimonial->imageSource = \Drupal::service('file_url_generator')->generateAbsoluteString($imageUri);
     $testimonial->imageAltText = $paragraph->field_media->entity->field_media_image->alt;
   }
 
@@ -78,7 +79,8 @@ function asu_react_core_process_component_gallery_image(&$variables) {
   $image->id = $id;
 
   if ($paragraph->field_media->target_id && $paragraph->field_media->entity->field_media_image->target_id) {
-    $image->imageSource = file_create_url($paragraph->field_media->entity->field_media_image->entity->getFileUri());
+    $fileUri = $paragraph->field_media->entity->field_media_image->entity->getFileUri();
+    $image->imageSource = \Drupal::service('file_url_generator')->generateAbsoluteString($fileUri);
     $image->imageAltText = $paragraph->field_media->entity->field_media_image->alt;
   }
   if ($paragraph->field_formatted_text) {
