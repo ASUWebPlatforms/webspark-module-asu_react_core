@@ -44,7 +44,20 @@
     url-loader "^4.1.1"
     webpack-node-externals "^3.0.0"
 
-"@asu-design-system/components-core@1.25.2", "@asu-design-system/components-core@^1.25.2":
+"@asu-design-system/components-core@1.26.1":
+  version "1.26.1"
+  resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponents-core/-/components-core-1.26.1.tgz#53e9f9abbea35b2ade215262783f781faa2e4d55"
+  integrity sha512-a8EZAJmsBulImYzyIxtFj2RgupW9fZzfEi8+p5tGbj/kZGdOyWlyIMbCdBoBrVs5IasCzuJkN52RJpPyl2aG6Q==
+  dependencies:
+    "@storybook/addon-knobs" "^6.2.9"
+    classnames "^2.2.6"
+    date-fns "^2.19.0"
+    dompurify "^2.2.7"
+    phone-fns "^3.2.3"
+    prop-types "^15.7.2"
+    styled-components "^5.3.0"
+
+"@asu-design-system/components-core@^1.25.2":
   version "1.25.2"
   resolved "https://registry.web.asu.edu/@asu-design-system%2fcomponents-core/-/components-core-1.25.2.tgz#b62e65758e53b048d80ea9a88b2e9977de378d1a"
   integrity sha512-pEyHKsJfMKhLL/7SBUjNh4svwXtla7TsI7uluIc1s79t1DWXqcOR5Md1XwKN5KBx6y68cCJilE2fbbweYE5Jmg==
