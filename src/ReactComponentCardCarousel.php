@@ -6,17 +6,17 @@ class ReactComponentCardCarousel implements ReactComponent {
 
   public function buildSettings(&$variables) {
     $block = $variables['content']['#block_content'];
-    $variables['content']['#prefix'] = '<div id="cardCarouselContainer"></div>';
-
+    
     $rand_id = random_int(0, PHP_INT_MAX);
+    $carousel_card_id = 'cardCarouselContainer-' . $rand_id;
     $block_id = 'asu-card-carousel-container-' . $rand_id;
+    
+    $variables['content']['#prefix'] = '<div id="' . $carousel_card_id . '"></div>';
+    $variables['attributes']['id'] = $block_id;
     $variables['attributes']['class'][] = 'asu-card-carousel-container';
 
-    $variables['attributes']['id'] = $block_id;
-
-
     $card_carousel = new \stdClass();
-    $card_carousel->targetSelector = $block_id;
+    $card_carousel->targetSelector = $carousel_card_id;
     $card_carousel->items = [];
 
     if ($block->field_card_orientation) {
