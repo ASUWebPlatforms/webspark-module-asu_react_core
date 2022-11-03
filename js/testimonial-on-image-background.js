@@ -27,6 +27,7 @@
               },
             },
             imageSource: testimonial.imageSource,
+            imageAltText: testimonial.imageAltText,
             altText: testimonialData.altText,
             itemStyle: {
               containerCssClass: testimonialData.style,
