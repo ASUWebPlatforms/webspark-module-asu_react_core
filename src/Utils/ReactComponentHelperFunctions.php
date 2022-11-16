@@ -126,7 +126,8 @@ class ReactComponentHelperFunctions {
     if (isset($paragraph->field_icon)) {
       $icon_name = $paragraph->field_icon->icon_name;
       $icon_style = $paragraph->field_icon->style;
-      $card->icon = [$icon_style, $icon_name];
+      $icon_settings = unserialize($paragraph->field_icon->settings);
+      $card->icon = [$icon_style, $icon_name, $icon_settings];
     }
 
     $card->clickable = false;
