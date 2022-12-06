@@ -19,3 +19,4 @@ node_modules/@asu-design-system/components-core/dist/*
 !node_modules/@asu-design-system/components-core/dist/libCore.min.js
 !node_modules/@asu-design-system/components-core/dist/libCore.umd.js
 .idea/
+.DS_Store
