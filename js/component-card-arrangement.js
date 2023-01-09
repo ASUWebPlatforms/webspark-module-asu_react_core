@@ -31,6 +31,7 @@
               linkLabel: card.linkLabel,
               linkUrl: card.linkUrl,
               tags: card.tags,
+              showBorders: card.showBorders,
             },
           });
 	      });
