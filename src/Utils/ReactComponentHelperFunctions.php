@@ -137,6 +137,11 @@ class ReactComponentHelperFunctions {
       $card->clickHref = $link->toString();
     }
 
+    $card->showBorders = false;
+    if ($paragraph->field_show_borders && $paragraph->field_show_borders->value) {
+      $card->showBorders = true;
+    }
+
     $settings = [];
     $settings['components']['card'][$id] = $card;
 
