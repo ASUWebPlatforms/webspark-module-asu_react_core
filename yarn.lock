@@ -10,10 +10,10 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@asu/component-carousel@1.2.0":
-  version "1.2.0"
-  resolved "https://npm.pkg.github.com/download/@ASU/component-carousel/1.2.0/000835dc89bc0e997665b94bd66fc1413ab7fb75#000835dc89bc0e997665b94bd66fc1413ab7fb75"
-  integrity sha512-SEtMJtM6HztiB+Ezw2ggJEhWmNNoRXy7GCIx/chrOc3Yhga0I7GhmwmgSJDBl1f/PYyz4NpKAullbWm7/ec3BQ==
+"@asu/component-carousel@1.2.1":
+  version "1.2.1"
+  resolved "https://npm.pkg.github.com/download/@ASU/component-carousel/1.2.1/24dd03a591dc07fa7a690f767ef8ca7c33b49c00#24dd03a591dc07fa7a690f767ef8ca7c33b49c00"
+  integrity sha512-Vub+3XjmqgM+ibgibvtvFiav3UIXDD4T3q1sWJmVH37ov71YQb1w0qlU1IO6315Khdi7NUu3FSZP6BXSPVRyLw==
   dependencies:
     "@asu/components-core" "^1.0.0"
     "@asu/design-tokens" "^1.0.0"
@@ -45,7 +45,20 @@
     url-loader "^4.1.1"
     webpack-node-externals "^3.0.0"
 
-"@asu/components-core@1.4.0", "@asu/components-core@^1.0.0":
+"@asu/components-core@1.5.0":
+  version "1.5.0"
+  resolved "https://npm.pkg.github.com/download/@asu/components-core/1.5.0/2b005b159145bc1f4e79751942bea24e7fe71c4e#2b005b159145bc1f4e79751942bea24e7fe71c4e"
+  integrity sha512-b9CLwQeHQ78BrtYlKkIXzuwimbRmNmvC0XmUTh7TuywGIgQ6wbU2O1buh3nxVKYZBPYXJGLiP6CSBGjCgKy+GQ==
+  dependencies:
+    "@storybook/addon-knobs" "^6.2.9"
+    classnames "^2.2.6"
+    date-fns "^2.19.0"
+    dompurify "^2.2.7"
+    phone-fns "^3.2.3"
+    prop-types "^15.7.2"
+    styled-components "^5.3.0"
+
+"@asu/components-core@^1.0.0":
   version "1.4.0"
   resolved "https://npm.pkg.github.com/download/@asu/components-core/1.4.0/a2f4856756dad1ca1be099d9dc7b9478aeaaa67c#a2f4856756dad1ca1be099d9dc7b9478aeaaa67c"
   integrity sha512-nPkS6HCww8gGmVrwDwIfCI5/RNHNUBE7cGjlOpqgV2qH7lmGLQa6AprKZYLazNsc6D/11Dfqjsrf6s0Edp1nqw==
